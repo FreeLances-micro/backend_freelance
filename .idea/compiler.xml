@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="auth-service" />
+        <module name="leave-management-service" />
+        <module name="employeeServices" />
+        <module name="discovery-server" />
+        <module name="eventMS" />
+        <module name="entretienService" />
+        <module name="Job-service" />
+        <module name="zuul-service" />
+        <module name="salary-management-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auth-service" target="1.8" />
+      <module name="discovery-server" target="1.8" />
+      <module name="employeeServices" target="1.8" />
+      <module name="entretienService" target="1.8" />
+      <module name="eventMS" target="1.8" />
+      <module name="Job-service" target="1.8" />
+      <module name="leave-management-service" target="1.8" />
+      <module name="salary-management-service" target="1.8" />
+      <module name="zuul-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Job-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
+      <module name="discovery-server" options="-parameters" />
+      <module name="employeeServices" options="-parameters" />
+      <module name="entretienService" options="-parameters" />
+      <module name="eventMS" options="-parameters" />
+      <module name="leave-management-service" options="-parameters" />
+      <module name="salary-management-service" options="-parameters" />
+      <module name="zuul-service" options="-parameters" />
+    </option>
+  </component>
+</project>

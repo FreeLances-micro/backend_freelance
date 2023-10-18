@@ -1,0 +1,118 @@
+version: "3.9"
+services:
+  discovery:
+    build:  ../discovery-service
+    ports:
+      - "8761:8761"
+    image: "discovery-service"
+  event:
+    build: ../eventMS
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+    ports:
+      - "8080:8080"
+    image: "event-service"
+  zuul:
+    build: ../zuul-service
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+    ports:
+      - "8762:8762"
+    image: "zuul-service"
+
+  employee:
+    build: ../employeeServices
+    restart: always
+    ports:
+      - 8082:8082
+    depends_on:
+      - mysqldb1
+  mysqldb1:
+      image: "mysql:latest"
+      restart: always
+      ports:
+        - 3307:3307
+      environment:
+        MYSQL_DATABASE: employee
+        MYSQL_USER: dzovi
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_TCP_PORT: 3307
+  salary:
+    build: ../salary-management-service
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - mysqldb2
+  mysqldb2:
+      image: "mysql:latest"
+      restart: always
+      ports:
+        - 3308:3308
+      environment:
+        MYSQL_DATABASE: salaryDB
+        MYSQL_USER: firas
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_TCP_PORT: 3308
+  leave:
+    build: ../leave-management-service
+    restart: always
+    ports:
+      - 8084:8084
+    depends_on:
+      - mysqldb3
+  mysqldb3:
+      image: "mysql:latest"
+      restart: always
+      ports:
+        - 3309:3309
+      environment:
+        MYSQL_DATABASE: leaveDB
+        MYSQL_USER: raed
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_TCP_PORT: 3309
+  auth:
+    build: ../auth-service
+    restart: always
+    ports:
+      - 8085:8085
+    depends_on:
+      - mysqldb4
+  mysqldb4:
+      image: "mysql:latest"
+      restart: always
+      ports:
+        - 3310:3310
+      environment:
+        MYSQL_DATABASE: auth-db
+        MYSQL_USER: khouloud
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_TCP_PORT: 3310
+  job:
+    build: ../Job-service
+    restart: always
+    ports:
+      - 8086:8086
+    depends_on:
+      - mysqldb5
+  mysqldb5:
+      image: "mysql:latest"
+      restart: always
+      ports:
+        - 3311:3311
+      environment:
+        MYSQL_DATABASE: job-db
+        MYSQL_USER: jaidi
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_TCP_PORT: 3311
+
+
+  mailing:
+    build: ../Mailing-service
+    ports:
+      - "5000:5000"
